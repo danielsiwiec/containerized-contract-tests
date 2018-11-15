@@ -1,13 +1,22 @@
-# Producer
+# Containerized Consumer Driven Contracts
+
+This demo will walk you through the following steps:
+
+1. Starting a provider service (express API)
+1. Running a consumer application (node client)
+1. Publishing a contract by a consumer
+1. Exercising the contract against a provider
+
+## Provider
 
 This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body.
 
-## Running
+### Running
 
-Go into the producer directory:
+Go into the provider directory:
 
 ```shell
-cd producer
+cd provider
 ```
 
 Install node modules:
@@ -41,7 +50,7 @@ You should see the following response:
 ```
 
 
-## Public tunnel (optional)
+### Public tunnel (optional)
 In order to simulate a real-life scenario of the server running in the cloud, we will use a public tunnelling service [ngrok](https://ngrok.com/)
 
 In a separate tab, run the following command:
@@ -68,11 +77,11 @@ The local service that we started previously is now tunneled through a publicly 
 curl https://33bbec96.ngrok.io
 ```
 
-# Consumer
+## Consumer
 
-The **Consumer** is an application relying on the **Producer** for it's functionality.
+The **Consumer** is an application relying on the **Provider** for it's functionality.
 
-## Running
+### Running
 The consumer application needs the provider's endpoint. It'll be passed through an environment variable like this (put in the correct ngrok endpoint for the provider):
 
 ```
