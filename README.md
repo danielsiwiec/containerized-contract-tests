@@ -70,7 +70,14 @@ curl https://33bbec96.ngrok.io
 
 # Consumer
 
-The **Consumer** is an application relying the **Producer** for it's functionality.
+The **Consumer** is an application relying on the **Producer** for it's functionality.
+
+## Running
+The consumer application needs the provider's endpoint. It'll be passed through an environment variable like this (put in the correct ngrok endpoint for the provider):
+
+```
+PROVIDER_URL=https://4e9d9e28.ngrok.io npm start
+```
 
 
 ## Tests
