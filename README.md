@@ -82,12 +82,46 @@ curl https://33bbec96.ngrok.io
 The **Consumer** is an application relying on the **Provider** for it's functionality.
 
 ### Running
+
+Go into the consumer directory:
+
+```shell
+cd consumer
+```
+
+Install node modules:
+```shell
+npm install
+```
+
 The consumer application needs the provider's endpoint. It'll be passed through an environment variable like this (put in the correct ngrok endpoint for the provider):
 
-```
+```shell
 PROVIDER_URL=https://4e9d9e28.ngrok.io npm start
 ```
 
+You should see a similar output to this:
 
-## Tests
-http://docker.for.mac.localhost:3000
+```
+His first name is Daniel, but he goes by Dan
+```
+
+### Tests
+This is how to run the tests directly on the host machine (not through Docker).
+
+Go into the test folder:
+
+```shell
+cd contract-tests
+```
+
+Install node modules:
+```shell
+npm install
+```
+
+Run the tests, again by passing the service endpoint
+```
+cd 
+PROVIDER_URL=https://4e9d9e28.ngrok.io jest
+```
