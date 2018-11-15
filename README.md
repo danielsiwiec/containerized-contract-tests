@@ -36,10 +36,14 @@ Run the service:
 npm start
 ```
 
-At this point, the server is running. You can exercise the endpoint in the following way:
+At this point, the server is running. In order to simulate a real-life scenario of the server running in the cloud, a tunneling service ([ngrok](https://ngrok.com/)) has been used.
+
+The output of the `start` command will give you a publicly accessible endpoint for the service (e.g. https://c0587a05.ngrok.io)
+
+You can exercise the endpoint in the following way:
 
 ```bash
-curl http://localhost:3000/
+curl https://c0587a05.ngrok.io
 ```
 
 You should see the following response:
@@ -52,34 +56,6 @@ You should see the following response:
     "nick": "Dan"
   }
 }
-```
-
-
-### Public tunnel (optional)
-In order to simulate a real-life scenario of the server running in the cloud, we will use a public tunnelling service [ngrok](https://ngrok.com/)
-
-In a separate tab, run the following command:
-
-```shell
-npm run tunnel
-```
-
-This should produce an output similar to this:
-
-```shell
-Session Status                online
-Session Expires               7 hours, 58 minutes
-Version                       2.2.8
-Region                        United States (us)
-Web Interface                 http://127.0.0.1:4040
-Forwarding                    http://33bbec96.ngrok.io -> localhost:3000
-Forwarding                    https://33bbec96.ngrok.io -> localhost:3000
-```
-
-The local service that we started previously is now tunneled through a publicly accessible URL. You can test it by modifying the previous command:
-
-```shell
-curl https://33bbec96.ngrok.io
 ```
 
 ## Consumer
