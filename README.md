@@ -56,10 +56,10 @@ The *Consumer* is an application relying on the *Provider* for it's functionalit
 The consumer application needs the provider's endpoint. It'll be passed through an environment variable like this (put in the correct ngrok endpoint for the provider):
 
 ```shell
-PROVIDER_URL=https://973bddfd.ngrok.io make consumer
+make consumer
 ```
 
-This command build a consumer image and runs the container, passing in the endpoint as an environment variable.
+This command build a consumer image and runs the container, passing in the endpoint as an environment variable. The variable is read from the *Provider* container
 
 You should see a similar output to this:
 
@@ -88,8 +88,10 @@ This will build a Docker image with the contract tests
 Start a container to run the contract tests and pass the PROVIDER_URL variable:
 
 ```shell
-PROVIDER_URL=https://973bddfd.ngrok.io make contract-run
+make contract-run
 ```
+
+Similar as before - the variable is read from the *Provider* container.
 
 You should see an output similar to this:
 
