@@ -7,6 +7,11 @@ This demo will walk you through the following steps:
 1. Publishing a contract by a consumer
 1. Exercising the contract against a provider
 
+## Prerequisites
+
+* Docker
+* Node 10 or higher
+
 ## Provider
 
 This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body. In this section we will start the API and exercise it's endpoint.
