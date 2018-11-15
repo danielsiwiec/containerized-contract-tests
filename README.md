@@ -10,7 +10,6 @@ This demo will walk you through the following steps:
 ## Prerequisites
 
 * Docker
-* Node 10 or higher
 
 ## Provider
 
@@ -21,24 +20,14 @@ This is a simple HTTP server with a single endpoint **GET \\** returning a hardc
 Go into the provider directory:
 
 ```shell
-cd provider
+make provider
 ```
 
-Install node modules:
-
-```shell
-npm install
-```
-
-Run the service:
-
-```shell
-npm start
-```
+This will build a Docker image for the *Provider* and start a container.
 
 At this point, the server is running. In order to simulate a real-life scenario of the server running in the cloud, a tunneling service ([ngrok](https://ngrok.com/)) has been used.
 
-The output of the `start` command will give you a publicly accessible endpoint for the service (e.g. https://c0587a05.ngrok.io)
+The output will give you a publicly accessible endpoint for the service (e.g. https://c0587a05.ngrok.io)
 
 You can exercise the endpoint in the following way:
 
@@ -60,53 +49,23 @@ You should see the following response:
 
 ## Consumer
 
-The **Consumer** is an application relying on the **Provider** for it's functionality. In this section we will run the consumer client application, as well as run contract tests against the provider.
+The *Consumer* is an application relying on the *Provider* for it's functionality. In this section we will run the consumer client application, as well as run contract tests against the provider.
 
 ### Running
-
-Go into the consumer directory:
-
-```shell
-cd consumer
-```
-
-Install node modules:
-```shell
-npm install
-```
 
 The consumer application needs the provider's endpoint. It'll be passed through an environment variable like this (put in the correct ngrok endpoint for the provider):
 
 ```shell
-PROVIDER_URL=https://4e9d9e28.ngrok.io npm start
+PROVIDER_URL=https://973bddfd.ngrok.io make consumer
 ```
+
+This command build a consumer image and runs the container, passing in the endpoint as an environment variable.
 
 You should see a similar output to this:
 
-```
+```shell
 His first name is Daniel, but he goes by Dan
 ```
-
-### Tests
-This is how to run the tests directly on the host machine (not through Docker).
-
-Go into the test folder:
-
-```shell
-cd contract-tests
-```
-
-Install node modules:
-```shell
-npm install
-```
-
-Run the tests, again by passing the service endpoint
-```
-cd 
-PROVIDER_URL=https://4e9d9e28.ngrok.io jest
-```
-
 
 ## Publishing and exercising the contract
 In this section, we will do the following:
@@ -119,26 +78,20 @@ In this section, we will do the following:
 Go to the contract folder:
 
 ```shell
-cd consumer\contract-tests
+make contract-build
 ```
 
-Build and tag the image:
-
-```shell
-docker build . -t consumer-contract
-```
+This will build a Docker image with the contract tests
 
 ### Exercise the contract against the provider
 
-Start a container from the image and pass in the correct provider url:
+Start a container to run the contract tests and pass the PROVIDER_URL variable:
 
 ```shell
-docker run \
--e PROVIDER_URL=https://4e9d9e28.ngrok.io \
-consumer-contract
+PROVIDER_URL=https://973bddfd.ngrok.io make contract-run
 ```
 
-You should see output similar to this:
+You should see an output similar to this:
 
 ```shell
 PASS tests/name.test.js
