@@ -9,7 +9,7 @@ This demo will walk you through the following steps:
 
 ## Provider
 
-This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body.
+This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body. In this section we will start the API and exercise it's endpoint.
 
 ### Running
 
@@ -79,7 +79,7 @@ curl https://33bbec96.ngrok.io
 
 ## Consumer
 
-The **Consumer** is an application relying on the **Provider** for it's functionality.
+The **Consumer** is an application relying on the **Provider** for it's functionality. In this section we will run the consumer client application, as well as run contract tests against the provider.
 
 ### Running
 
@@ -124,4 +124,49 @@ Run the tests, again by passing the service endpoint
 ```
 cd 
 PROVIDER_URL=https://4e9d9e28.ngrok.io jest
+```
+
+
+## Publishing and exercising the contract
+In this section, we will do the following:
+
+1. (Consumer) Build and publish the contract test Docker image
+1. (Provider) Run the contract tests against the instance
+
+### Build and publish the contract image
+
+Go to the contract folder:
+
+```shell
+cd consumer\contract-tests
+```
+
+Build and tag the image:
+
+```shell
+docker build . -t consumer-contract
+```
+
+### Exercise the contract against the provider
+
+Start a container from the image and pass in the correct provider url:
+
+```shell
+docker run \
+-e PROVIDER_URL=https://4e9d9e28.ngrok.io \
+consumer-contract
+```
+
+You should see output similar to this:
+
+```shell
+PASS tests/name.test.js
+  Name service
+    ✓ should have the right schema (569ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.986s
+Ran all test suites.
 ```
