@@ -13,7 +13,7 @@ This demo will walk you through the following steps:
 
 ## Provider
 
-This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body. In this section we will start the API and exercise it's endpoint.
+This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body. In this section we will start the API and exercise its endpoint.
 
 ### Running
 
