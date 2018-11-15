@@ -7,6 +7,15 @@ This demo will walk you through the following steps:
 1. Publishing a contract by a consumer
 1. Exercising the contract against a provider
 
+## Typical workflow
+
+1. The *Provider* builds a service
+1. The *Consumer* integrates with it and has now a dependency on part of the *Provider* service
+1. The *Consumer* specifies its dependency in a suite of Contract Tests, in a technology of their choosing
+1. The *Consumer* publishes the image
+1. The *Provider* picks up the image and runs it in a container, passing pre-defined variables (hostname, etc)
+1. The *Provider* subscribes to new versions of the image and runs it on every new version
+
 ## Prerequisites
 
 * Docker
@@ -17,7 +26,7 @@ This is a simple HTTP server with a single endpoint **GET \\** returning a hardc
 
 ### Running
 
-Go into the provider directory:
+Start the *Provider* service:
 
 ```shell
 make provider
@@ -25,9 +34,7 @@ make provider
 
 This will build a Docker image for the *Provider* and start a container.
 
-At this point, the server is running. In order to simulate a real-life scenario of the server running in the cloud, a tunneling service ([ngrok](https://ngrok.com/)) has been used.
-
-The output will give you a publicly accessible endpoint for the service (e.g. https://c0587a05.ngrok.io)
+At this point, the server is running. In order to simulate a real-life scenario of the server running in the cloud, a tunneling service ([ngrok](https://ngrok.com/)) has been used. The output will give you a publicly accessible endpoint for the service (e.g. https://c0587a05.ngrok.io)
 
 You can exercise the endpoint in the following way:
 
@@ -53,13 +60,13 @@ The *Consumer* is an application relying on the *Provider* for it's functionalit
 
 ### Running
 
-The consumer application needs the provider's endpoint. It'll be passed through an environment variable like this (put in the correct ngrok endpoint for the provider):
+The consumer application needs the provider's endpoint. It'll be read from the *Provider* container and passed through an environment variable. Run the *Consumer* client:
 
 ```shell
 make consumer
 ```
 
-This command build a consumer image and runs the container, passing in the endpoint as an environment variable. The variable is read from the *Provider* container
+This command builds a consumer image and runs the container, passing in the endpoint as an environment variable. The variable is read from the *Provider* container.
 
 You should see a similar output to this:
 
@@ -71,7 +78,7 @@ His first name is Daniel, but he goes by Dan
 In this section, we will do the following:
 
 1. (Consumer) Build and publish the contract test Docker image
-1. (Provider) Run the contract tests against the instance
+1. (Provider) Start the container and run the contract tests against the instance
 
 ### Build and publish the contract image
 
@@ -81,7 +88,7 @@ Go to the contract folder:
 make contract-build
 ```
 
-This will build a Docker image with the contract tests
+This will build a Docker image with the contract tests in it.
 
 ### Exercise the contract against the provider
 
