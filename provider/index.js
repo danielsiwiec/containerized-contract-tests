@@ -5,13 +5,20 @@ const fs = require('fs')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => res.json({
-  name: {
-    first: 'Daniel',
-    last: 'Siwiec',
-    nick: 'Dan'
+const animals = {
+  duck: {
+    family: "bird",
+    sound: "quack quack!",
+    famousMember: "Donald Duck"
+  },
+  dog: {
+    family: "mamal",
+    sounds: "woof!",
+    famousMember: "Odie"
   }
-}))
+}
+
+app.get('/:animal', (req, res) => res.json(animals[req.params.animal]))
 
 app.listen(port, async () => {
   const url = await ngrok.connect(port)

@@ -22,7 +22,7 @@ This demo will walk you through the following steps:
 
 ## Provider
 
-This is a simple HTTP server with a single endpoint **GET \\** returning a hardcoded JSON body. In this section we will start the API and exercise its endpoint.
+This is an animal service with a single endpoint **GET \\{animal}** returning a JSON body. In this section we will start the service and exercise its endpoint.
 
 ### Running
 
@@ -39,18 +39,16 @@ At this point, the server is running. In order to simulate a real-life scenario 
 You can exercise the endpoint in the following way:
 
 ```bash
-curl https://c0587a05.ngrok.io
+curl https://c0587a05.ngrok.io/dog
 ```
 
 You should see the following response:
 
 ```json
 {
-  "name": {
-    "first": "Daniel",
-    "last": "Siwiec",
-    "nick": "Dan"
-  }
+  "family": "mamal",
+  "sounds": "woof!",
+  "famousMember": "Odie"
 }
 ```
 
@@ -71,7 +69,7 @@ This command builds a consumer image and runs the container, passing in the endp
 You should see a similar output to this:
 
 ```shell
-His first name is Daniel, but he goes by Dan
+Duck is a bird and it makes quack quack!
 ```
 
 ## Publishing and exercising the contract
@@ -103,9 +101,9 @@ Similar as before - the variable is read from the *Provider* container.
 You should see an output similar to this:
 
 ```shell
-PASS tests/name.test.js
-  Name service
-    ✓ should have the right schema (569ms)
+PASS tests/duck.test.js
+  Animal service
+    ✓ should describe a duck (569ms)
 
 Test Suites: 1 passed, 1 total
 Tests:       1 passed, 1 total
